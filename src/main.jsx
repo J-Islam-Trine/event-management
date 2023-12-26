@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
 
-
 //css file
 import './index.css'
 
@@ -13,7 +12,9 @@ import DefaultLayout from './layouts/default'
 
 //routes
 import HomePage from './pages/home';
-
+import SignupPage from './pages/signup';
+import SigninPage from './pages/signinPage';
+import Dashboard from './pages/dashboard';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,19 @@ const router = createBrowserRouter([
         element: <HomePage />,
         index: true
       },
+      {
+        element: <SignupPage />,
+        path: '/register'
+  
+      },
+      {
+        element: <SigninPage />,
+        path: '/login'
+      },
+      {
+        element: <Dashboard />,
+        path: '/dashboard'
+      }
     ]
   },
 ]);
