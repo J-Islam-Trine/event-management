@@ -1,48 +1,73 @@
 import { useSignUp } from "@clerk/clerk-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function SignupPage()
-{
+export default function SignupPage() {
+  const { isLoaded, signUp, setActive } = useSignUp();
+  const navigate = useNavigate();
 
-  const { isLoaded, signUp } = useSignUp();
+  async function handleSignUp(event) {
+        const formData = new FormData(event.currentTarget)
 
-    function handleSignUp(event)
-    {
-      event.preventDefault();
-      const submittedData = new FormData(event.currentTarget);
-
-      // Now you can fetch whatever data you want to.
-      const email = submittedData.get('email');
-      const password = submittedData.get('password')
+        const emailAddress = formData.get('email');
+        const password = formData.get('password')
+    
+    event.preventDefault();
+    if (!isLoaded) {
+      return;
+    }
+ 
+    // Start the sign-up process using the email and password provided
+    try {
+     const signUpResponse = await signUp.create({
+        emailAddress,
+        password,
+      });
+        console.log(signUpResponse);
+        if (signUpResponse.status === "complete") {
+        await setActive({ session: signUpResponse.createdSessionId })
+        navigate('/dashboard');
+      }
       
-      console.log(email, password);
-}
+    } catch (err) {
+      // This can return an array of errors.
+      // See https://clerk.com/docs/custom-flows/error-handling to learn about error handling
+      console.error(JSON.stringify(err, null, 2));
+    }
+  }
 
-    return(
-        <div className="w-full px-16 bg-primary">
-            <div className=" w-5/12 border-2 border-black mx-auto px-16 py-8 bg-primary">
-               <form className="" onSubmit={handleSignUp}>
-               <label className="form-control w-full max-w-xs">
-               <div className="label">
-    <span className="label-text">Write your Email</span>
-  </div>
-  <input type="email" name="email" className="input input-bordered rounded-none w-full bg-transparent border-3 border-black placeholder:text-black placeholder:text-xl" />
-
-                </label>
-                <label className="form-control w-full max-w-xs">
-               <div className="label">
-    <span className="label-text">Give a password</span>
-  </div>
-  <input type="password" name="password"  className="input input-bordered rounded-none w-full bg-transparent border-3 border-black placeholder:text-black placeholder:text-xl" />
-
-                </label>   
-                <label className="form-control w-full max-w-xs py-4">
-                <button className="btn btn-outline ">Sign Up</button>
-
-                </label>       
-
-
-                </form>
-        </div>
-        </div>
-    )
+  return (
+    <div className="w-full px-16 bg-primary">
+      
+      <div className=" w-5/12 border-2 border-black mx-auto px-16 py-8 bg-primary">
+        <form className="" onSubmit={handleSignUp}>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Write your Email</span>
+            </div>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="input input-bordered rounded-none w-full bg-transparent border-3 border-black placeholder:text-black placeholder:text-xl"
+            />
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Give a password</span>
+            </div>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className="input input-bordered rounded-none w-full bg-transparent border-3 border-black placeholder:text-black placeholder:text-xl"
+            />
+          </label>
+          <label className="form-control w-full max-w-xs py-4">
+            <button className="btn btn-outline ">Sign Up</button>
+          </label>
+        </form>
+      </div>
+    </div>
+  );
 }

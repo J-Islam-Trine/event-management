@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "event_name": "Birthday Parties",
+    "event_description": "We specialise in producing major birthday parties.  Whether you are planning a marquee party; a bespoke nightclub for a 21st Birthday; a mini festival or a decadent soiree for a 50th.\n  Look no further than our birthday party planner team…  We have the experience and the dedication to deliver your perfect event.",
+    "event_image": "https://ucarecdn.com/52cb49d4-d70f-4a6c-969e-d128497638c6/eventsbirthday.jpg",
+    "event_code": "bir"
+  },
+  {
+    "id": 2,
+    "event_name": "Retirement Parties",
+    "event_description": "Celebrate a life well-lived with a send-off that's as unique as the guest of honor. From casual garden soirees to elegant champagne receptions, we'll craft a farewell to remember.",
+    "event_image": "https://ucarecdn.com/2ed885ce-0198-4b02-b978-a74b0abfd389/eventsretirement.jpg",
+    "event_code": "ret"
+  },
+  {
+    "id": 3,
+    "event_name": "Marquee",
+    "event_description": "Make a statement under the stars. Our marquees offer a blank canvas for your grand vision, whether it's a gala under twinkling lights or a festival bathed in neon. Imagine the possibilities!",
+    "event_image": "https://ucarecdn.com/32d3afb3-2506-4c64-bc2b-0a8904f88b4a/eventsmarquee.jpg",
+    "event_code": "mar"
+  },
+  {
+    "id": 4,
+    "event_name": "Engagement Parties",
+    "event_description": "Pop the bubbly and let the romance bloom. We'll design an intimate space that sparkles with joy, setting the perfect stage for celebrating your 'yes!'",
+    "event_image": "https://ucarecdn.com/7d014c41-3a9d-4c29-841e-ca9ef2e1920e/eventsengagement.jpg",
+    "event_code": "eng"
+  },
+  {
+    "id": 5,
+    "event_name": "Gender Reveal Parties",
+    "event_description": "Discover the newest twinkle in your constellation with a party bursting with pink or blue. From confetti cannons to playful surprises, we'll make it a joyous reveal.",
+    "event_image": "https://ucarecdn.com/6b45d73c-02d6-4789-98e5-91ebc937a2f7/eventsgender_reveal.jpg",
+    "event_code": "gen"
+  },
+  {
+    "id": 6,
+    "event_name": "Wedding Parties",
+    "event_description": "From fairytale gardens to rooftop soirees, we'll weave your dream wedding into reality. With meticulous planning and personalized touches, we'll make your 'I do' echo through eternity.",
+    "event_image": "https://ucarecdn.com/d4a155a4-06cb-490d-821f-8592a885c547/eventswedding.jpg",
+    "event_code": "wed"
+  }
+]
