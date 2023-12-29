@@ -15,12 +15,16 @@ console.log(clerk_pub_key)
 import Navbar from "../components/header"
 import Footer from "../components/footer";
 
+import MessageProvider from "../providers/messageProvider";
+
 export default function DefaultLayout()
 {
     return(
         <ClerkProvider publishableKey={clerk_pub_key}>
                            <Navbar></Navbar>
-            <Outlet />
+            <MessageProvider>
+                <Outlet />
+            </MessageProvider>
             <Footer></Footer>
     </ClerkProvider>
 

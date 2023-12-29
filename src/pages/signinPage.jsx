@@ -1,9 +1,13 @@
 import {  useSignIn } from "@clerk/clerk-react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import {MessageContext} from '../context/messageContext'
 
 export default function SigninPage()
 {
     const { isLoaded, setActive, signIn } = useSignIn();
+    const {messageData, setMessageData} = useContext(MessageContext)
     const navigate = useNavigate();
 
    async function handleSignIn(event)
@@ -31,13 +35,17 @@ export default function SigninPage()
                 }
            
               } catch (err) {
-                console.error("error", err)
+                console.error("error", err.errors[0].message)
+                setMessageData(err.errors[0].message)
+                setTimeout(()=> {
+                  setMessageData(null)
+                }, 5000)
               }
     }   
 
     return(
         <div className="w-full px-16 bg-primary">
-            <div className=" w-5/12 border-2 border-black mx-auto px-16 py-8 bg-primary">
+            <div className="w-full md:w-8/12 lg:w-8/12 lg:border-2 md:border-2 border-black mx-auto px-4 md:px-16 lg:px-16 py-8 bg-primary">
                <form className="" onSubmit={handleSignIn}>
                <label className="form-control w-full max-w-xs">
                <div className="label">
@@ -57,7 +65,10 @@ export default function SigninPage()
                 <button className="btn btn-outline ">Sign In</button>
 
                 </label>       
-
+                {
+                  messageData &&
+                  <p className="font-semibold">{messageData}</p>
+                }
 
                 </form>
         </div>

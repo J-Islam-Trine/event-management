@@ -14,18 +14,22 @@ export default function Navbar()
 
   
     return(
-      <div className='px-16 bg-primary'>
-             <div className="navbar">
-        <div className="flex-1">
+      <div className='lg:px-16 md:px-16 bg-primary'>
+             <div className="navbar flex-col lg:flex md:flex">
+        <div className="md:flex-1 lg:flex-1">
           <NavLink to='/'>
           <img className='w-16 h-24' src={Logo} alt="" />
           </NavLink>
         </div>
-        <div className="flex-none gap-4">
-        <SmartLink target='/dashboard' wording='Dashboard'></SmartLink>
-        <SmartLink target='/events' wording='Events'></SmartLink>
-        </div>
-        <div className="navbar-end gap-4">
+
+        <div className="navbar-end gap-4 py-4">
+        
+        {
+            isSignedIn &&
+          <div> 
+            <SmartLink target='/dashboard' wording='Dashboard'></SmartLink>
+          </div>
+        }
         {
           !isSignedIn &&
           <>

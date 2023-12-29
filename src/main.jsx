@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
-
+import PrivateRoute from './components/privateRoute';
+import ReversePrivateRoute from './components/RevPrivateRoute';
 //css file
 import './index.css'
 
@@ -32,20 +33,20 @@ const router = createBrowserRouter([
         index: true
       },
       {
-        element: <SignupPage />,
+        element: <ReversePrivateRoute><SignupPage /></ReversePrivateRoute>,
         path: '/register'
   
       },
       {
-        element: <SigninPage />,
+        element: <ReversePrivateRoute><SigninPage /></ReversePrivateRoute>,
         path: '/login'
       },
       {
-        element: <Dashboard />,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
         path: '/dashboard'
       },
       {
-        element: <Event />,
+        element: <PrivateRoute><Event /></PrivateRoute>,
         path: '/events/:eventName',
         loader: async function({params})
         {
