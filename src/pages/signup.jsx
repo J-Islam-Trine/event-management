@@ -6,12 +6,13 @@ import { MessageContext } from "../context/messageContext";
 
 export default function SignupPage() {
   const { isLoaded, signUp, setActive } = useSignUp();
+  const [validity, setValidity]= useState({length: false, capitalLetter: false, specialChar: false})
   const contextValue = useContext(MessageContext);
   const navigate = useNavigate();
 
   async function handleSignUp(event) {
         const formData = new FormData(event.currentTarget)
-
+        
         const emailAddress = formData.get('email');
         const password = formData.get('password')
     
@@ -37,6 +38,56 @@ export default function SignupPage() {
       // See https://clerk.com/docs/custom-flows/error-handling to learn about error handling
       console.error(JSON.stringify(err, null, 2));
     }
+  }
+
+  function handlePasswordValidation(event)
+  {
+    const currentValue = event.target.value;
+    
+    const validationFlags = {
+      length: false, 
+      capitalLetter: false, 
+      specialChar: false
+    }
+
+    if (currentValue.length >= 8)
+    {
+      validationFlags.length = true;
+    }
+    else if (currentValue.length < 8)
+    {
+      validationFlags.length = false
+    }
+
+    if (/[A-Z]/.test(currentValue))
+    {
+        validationFlags.capitalLetter = true
+    }
+    else if (!/[A-Z]/.test(currentValue))
+    {
+      validationFlags.capitalLetter = false
+    }
+
+    if (/([~`!@#$%^&*()_+\-=;':"])/.test(currentValue))
+    {
+      validationFlags.specialChar = true
+    }
+    else if (!/([~`!@#$%^&*()_+\-=;':"])/.test(currentValue))
+    {
+      validationFlags.specialChar = false
+    }
+
+
+    setValidity(validationFlags)
+
+    
+
+
+
+
+   
+
+
   }
 
   return (
@@ -65,10 +116,42 @@ export default function SignupPage() {
               name="password"
               id="password"
               className="input input-bordered rounded-none w-full bg-transparent border-3 border-black placeholder:text-black placeholder:text-xl"
+              onChange={handlePasswordValidation}
             />
+            <ul>
+              <li>
+                {
+                  !validity.length ? 
+                  <span>❌</span>
+                  :
+                  <span>✔</span>
+                }
+                Password must be atleast 8 character long.</li>
+                <li>
+                {
+                  !validity.capitalLetter ? 
+                  <span>❌</span>
+                  :
+                  <span>✔</span>
+                }
+                Password must have at least one capital letter.</li>
+                <li>
+                {
+                  !validity.specialChar ? 
+                  <span>❌</span>
+                  :
+                  <span>✔</span>
+                }
+                Password must have at least one special character.</li>
+            </ul>
           </label>
           <label className="form-control w-full max-w-xs py-4">
-            <button className="btn btn-outline ">Sign Up</button>
+            {
+             validity.specialChar && validity.capitalLetter && validity.length ?
+              <button className={`btn btn-outline`}>Sign Up</button>
+              :
+              <button className={`btn btn-outline`} disabled>Sign Up</button>
+            }
           </label>
         </form>
       </div>
